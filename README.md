@@ -50,8 +50,8 @@ cd kotlin-app
 
 3. Check the folder structure
 
-    `kotlin+java → com.example.maternitymanagement → data.remote` → SupabaseClient
-   `ui → auth, mother, navigation, components`
+    `kotlin+java → data.remote` → SupabaseClient
+   `kotlin+java → ui → auth, mother, navigation, components`
 
 4. Build the project
 
