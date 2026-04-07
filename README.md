@@ -109,7 +109,3 @@ After following the steps above, your friend can **clone, build, and run** the p
 
 ---
 
-If you want, I can **also generate a more visually friendly version with badges, emojis, and shortcuts for VS Code commands** so it looks professional on GitHub.  
-
-Do you want me to do that?
-```
