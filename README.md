@@ -48,11 +48,11 @@ cd kotlin-app
 
    Install the recommended extensions if prompted (Kotlin, Android, Gradle).
 
-3. Check the folder structure
+3. Check the folder structure 
 
-    `kotlin+java → data.remote` → SupabaseClient
-   `kotlin+java → ui → auth, mother, navigation, components`
-
+- `kotlin+java → data.remote` → SupabaseClient  
+- `kotlin+java → ui → auth, mother, navigation, components`
+    
 4. Build the project
 
 ```bash
