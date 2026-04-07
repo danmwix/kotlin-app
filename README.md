@@ -12,10 +12,10 @@ This is a Kotlin-based Android application for maternity management. The app use
 
 - data.remote  
   Contains `SupabaseClient` setup for connecting to the backend.  
-  Located under `kotlin+java → com.example.maternitymanagement → data.remote`.
+  Located under `kotlin+java → data.remote`.
 
 - ui  
-  Modular UI code under `kotlin+java → com.example.maternitymanagement → ui`:  
+  Modular UI code under `kotlin+java → ui`:  
   - auth → `MotherLoginScreen.kt`, `MotherRegisterScreen.kt`, `RoleSelection.kt`  
   - mother→ `MotherDashboardScreen.kt`  
   - navigation → `APPNavHost.kt`  
