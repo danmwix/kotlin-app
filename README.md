@@ -1,9 +1,7 @@
 # kotlin-app
-Absolutely! Here's a **clean, precise, high-yield `README.md`** tailored for your Kotlin MaternityManagement project that your friend can follow easily in VS Code, whether using an emulator or a physical device:
 
----
 
-````markdown
+markdown
 # MaternityManagement App
 
 This is a Kotlin-based Android application for maternity management. The app uses **Supabase** as its backend (PostgreSQL) and is structured using Kotlin + Java packages for modularity.
@@ -12,50 +10,50 @@ This is a Kotlin-based Android application for maternity management. The app use
 
 ## 📂 Project Structure
 
-- **`data.remote`**  
+- data.remote  
   Contains `SupabaseClient` setup for connecting to the backend.  
   Located under `kotlin+java → com.example.maternitymanagement → data.remote`.
 
-- **`ui`**  
+- ui  
   Modular UI code under `kotlin+java → com.example.maternitymanagement → ui`:  
-  - **`auth`** → `MotherLoginScreen.kt`, `MotherRegisterScreen.kt`, `RoleSelection.kt`  
-  - **`mother`** → `MotherDashboardScreen.kt`  
-  - **`navigation`** → `APPNavHost.kt`  
-  - **`components`** → reusable UI components
+  - auth → `MotherLoginScreen.kt`, `MotherRegisterScreen.kt`, `RoleSelection.kt`  
+  - mother→ `MotherDashboardScreen.kt`  
+  - navigation → `APPNavHost.kt`  
+  - components → reusable UI components
 
-- **`gradleScripts`**  
+- gradleScripts 
   Contains `build.gradle.kts` (Module: app) with all project dependencies.
 
+
+
+## Prerequisites
+
+1. VS Code (or Android Studio if preferred) with Kotlin & Android support.  
+2. Android Emulator OR an Android device with developer mode enabled.  
+3. Git installed on your system.  
+4. Supabase Project URL & Anon Key for the backend (update `SupabaseClient` in `data.remote`).  
+
 ---
 
-## ⚡ Prerequisites
+## Setup Instructions
 
-1. **VS Code** (or Android Studio if preferred) with Kotlin & Android support.  
-2. **Android Emulator** OR an Android device with developer mode enabled.  
-3. **Git** installed on your system.  
-4. **Supabase Project URL & Anon Key** for the backend (update `SupabaseClient` in `data.remote`).  
-
----
-
-## 🚀 Setup Instructions
-
-1. **Clone the repository:**
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/danmwix/kotlin-app.git
 cd kotlin-app
 ````
 
-2. **Open the project in VS Code**
+2. Open the project in VS Code
 
-   * Install the recommended extensions if prompted (Kotlin, Android, Gradle).
+   Install the recommended extensions if prompted (Kotlin, Android, Gradle).
 
-3. **Check the folder structure**
+3. Check the folder structure
 
-   * `kotlin+java → com.example.maternitymanagement → data.remote` → SupabaseClient
-   * `ui → auth, mother, navigation, components`
+    `kotlin+java → com.example.maternitymanagement → data.remote` → SupabaseClient
+   `ui → auth, mother, navigation, components`
 
-4. **Build the project**
+4. Build the project
 
 ```bash
 ./gradlew build
@@ -79,11 +77,11 @@ cd kotlin-app
 
 ---
 
-## 📝 Notes
+## Notes
 
-* Ensure your **Supabase URL & Anon Key** are correctly set in `data.remote`.
-* UI screens are modular; you can explore or extend the `auth`, `mother`, `navigation`, and `components` packages.
-* All dependencies are in `build.gradle.kts (Module: app)`. Gradle will sync automatically on first build.
+Ensure your Supabase URL & Anon Key are correctly set in `data.remote`.
+UI screens are modular; you can explore or extend the `auth`, `mother`, `navigation`, and `components` packages.
+All dependencies are in `build.gradle.kts (Module: app)`. Gradle will sync automatically on first build.
 
 ---
 
@@ -99,9 +97,6 @@ cd kotlin-app
 
 ---
 
-## ✅ Ready to Go
-
-After following the steps above, your friend can **clone, build, and run** the project in VS Code or Android Studio and test it either on an emulator or a physical device.
 
 ---
 
