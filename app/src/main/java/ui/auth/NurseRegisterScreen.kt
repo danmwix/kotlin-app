@@ -3,12 +3,10 @@ package com.example.maternitymanagement.ui.auth
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment   // ✅ Import Alignment here
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.maternitymanagement.data.remote.FirebaseManager
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -16,14 +14,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Composable
-fun MotherRegisterScreen(navController: NavHostController) {
+fun NurseRegisterScreen(navController: NavHostController) {
     var fullName by remember { mutableStateOf("") }
-    var regNumber by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    var isLoading by remember { mutableStateOf(false) }
     var message by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
@@ -31,16 +28,14 @@ fun MotherRegisterScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally,   // ✅ Now works
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Create Account", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+        Text("Nurse Registration", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(value = fullName, onValueChange = { fullName = it }, label = { Text("Full Name") }, modifier = Modifier.fillMaxWidth())
-        Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(value = regNumber, onValueChange = { regNumber = it }, label = { Text("Registration Number") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(12.dp))
         OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(12.dp))
@@ -64,20 +59,20 @@ fun MotherRegisterScreen(navController: NavHostController) {
                 isLoading = true
                 scope.launch {
                     try {
-                        val result = FirebaseManager.auth.createUserWithEmailAndPassword(email.trim(), password).await()
+                        val result = FirebaseManager.auth.createUserWithEmailAndPassword(email, password).await()
                         val userId = result.user?.uid ?: throw Exception("Failed to create account")
 
+                        // Save profile in Firestore
                         FirebaseManager.firestore.collection("profiles").document(userId).set(
                             mapOf(
                                 "id" to userId,
-                                "full_name" to fullName.trim(),
-                                "registration_number" to regNumber.trim(), // ✅ ensure trimmed
-                                "email" to email.trim(),
-                                "role" to "expectant_mother"
+                                "full_name" to fullName,
+                                "email" to email,
+                                "role" to "nurse"
                             )
                         ).await()
 
-                        navController.navigate("mother_login")
+                        navController.navigate("nurse_login")
                     } catch (e: FirebaseAuthUserCollisionException) {
                         message = "Email already in use"
                     } catch (e: Exception) {
@@ -93,11 +88,11 @@ fun MotherRegisterScreen(navController: NavHostController) {
         }
 
         if (message.isNotEmpty()) {
-            Text(message, color = if (message.contains("success", ignoreCase = true)) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 16.dp))
+            Text(message, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 16.dp))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = { navController.navigate("mother_login") }) {
+        TextButton(onClick = { navController.navigate("nurse_login") }) {
             Text("Already have an account? Login here")
         }
     }

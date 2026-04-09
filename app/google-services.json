@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "447370922900",
+    "project_id": "maternity-management-81485",
+    "storage_bucket": "maternity-management-81485.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447370922900:android:cbecbb938cbf8113459d81",
+        "android_client_info": {
+          "package_name": "com.example.maternitymanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgraSnGs3BgNjKMHQgNpFY5DmXmVy07No"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

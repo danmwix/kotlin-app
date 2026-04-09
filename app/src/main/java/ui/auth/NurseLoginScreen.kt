@@ -5,22 +5,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.maternitymanagement.data.remote.FirebaseManager
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Composable
-fun MotherLoginScreen(navController: NavHostController) {
+fun NurseLoginScreen(navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var isLoading by remember { mutableStateOf(false) }
     var message by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
@@ -31,18 +28,29 @@ fun MotherLoginScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Welcome Back", fontSize = 28.sp, fontWeight = FontWeight.Bold)
+        Text("Nurse Login", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(modifier = Modifier.height(32.dp))
-
-        OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Password") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
 
-        Spacer(modifier = Modifier.height(32.dp))
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            CircularProgressIndicator()
             Spacer(modifier = Modifier.height(16.dp))
         }
 
@@ -52,11 +60,9 @@ fun MotherLoginScreen(navController: NavHostController) {
                 scope.launch {
                     try {
                         FirebaseManager.auth.signInWithEmailAndPassword(email, password).await()
-                        navController.navigate("mother_dashboard")
-                    } catch (e: FirebaseAuthInvalidCredentialsException) {
-                        message = "Invalid email or password"
+                        navController.navigate("nurse_dashboard")
                     } catch (e: Exception) {
-                        message = "Login failed"
+                        message = e.message ?: "Login failed"
                     }
                     isLoading = false
                 }
@@ -68,11 +74,15 @@ fun MotherLoginScreen(navController: NavHostController) {
         }
 
         if (message.isNotEmpty()) {
-            Text(message, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(top = 16.dp))
+            Text(
+                message,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        TextButton(onClick = { navController.navigate("mother_register") }) {
+        TextButton(onClick = { navController.navigate("nurse_register") }) {
             Text("Don’t have an account? Register")
         }
     }

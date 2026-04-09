@@ -9,13 +9,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RoleSelectionScreen(navController: NavHostController) {
     var selectedRole by remember { mutableStateOf("Select your role") }
     var expanded by remember { mutableStateOf(false) }
 
-    val roles = listOf("Expectant Mother", "Healthcare Provider")
+    // ✅ Now includes Nurse
+    val roles = listOf("Expectant Mother", "Nurse")
 
     Column(
         modifier = Modifier
@@ -80,8 +82,7 @@ fun RoleSelectionScreen(navController: NavHostController) {
             onClick = {
                 when (selectedRole) {
                     "Expectant Mother" -> navController.navigate("mother_register")
-                    "Healthcare Provider" -> navController.navigate("provider_selection")
-                    else -> {}
+                    "Nurse" -> navController.navigate("nurse_register")
                 }
             },
             modifier = Modifier.fillMaxWidth()
