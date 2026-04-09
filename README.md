@@ -50,7 +50,7 @@ cd kotlin-app
 
 3. Check the folder structure 
 
-- `kotlin+java → data.remote` → SupabaseClient  
+- `kotlin+java → data.remote` → FirebaseManager 
 - `kotlin+java → ui → auth, mother, navigation, components`
     
 4. Build the project
@@ -79,7 +79,7 @@ cd kotlin-app
 
 ## Notes
 
-Ensure your Supabase URL & Anon Key are correctly set in `data.remote`.
+Use the same FirebaseManager.kt no need to change it in `data.remote`.
 UI screens are modular; you can explore or extend the `auth`, `mother`, `navigation`, and `components` packages.
 All dependencies are in `build.gradle.kts (Module: app)`. Gradle will sync automatically on first build.
 
@@ -93,7 +93,7 @@ All dependencies are in `build.gradle.kts (Module: app)`. Gradle will sync autom
 | `mother`      | `MotherDashboardScreen.kt`                                            | Mother’s main dashboard screen |
 | `navigation`  | `APPNavHost.kt`                                                       | App navigation setup           |
 | `components`  | -                                                                     | Reusable UI components         |
-| `data.remote` | `SupabaseClient`                                                      | Backend API client setup       |
+| `data.remote` | `FirebaseManger`                                                      | Backend API client setup       |
 
 ---
 
