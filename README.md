@@ -11,7 +11,7 @@ This is a Kotlin-based Android application for maternity management. The app use
 ## 📂 Project Structure
 
 - data.remote  
-  Contains `SupabaseClient` setup for connecting to the backend.  
+  Contains `FirebaseManager` setup for connecting to the backend.  
   Located under `kotlin+java → data.remote`.
 
 - ui  
