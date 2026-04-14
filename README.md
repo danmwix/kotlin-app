@@ -4,7 +4,7 @@
 markdown
 # MaternityManagement App
 
-This is a Kotlin-based Android application for maternity management. The app uses **Supabase** as its backend (PostgreSQL) and is structured using Kotlin + Java packages for modularity.
+This is a Kotlin-based Android application for maternity management. The app uses **Firebase** as its backend and is structured using Kotlin + Java packages for modularity.
 
 ---
 
