@@ -16,8 +16,8 @@ fun RoleSelectionScreen(navController: NavHostController) {
     var selectedRole by remember { mutableStateOf("Select your role") }
     var expanded by remember { mutableStateOf(false) }
 
-    // ✅ Now includes Nurse
-    val roles = listOf("Expectant Mother", "Nurse")
+    // ✅ Now includes Pharmacist
+    val roles = listOf("Expectant Mother", "Nurse", "Doctor", "Pharmacist")
 
     Column(
         modifier = Modifier
@@ -83,6 +83,8 @@ fun RoleSelectionScreen(navController: NavHostController) {
                 when (selectedRole) {
                     "Expectant Mother" -> navController.navigate("mother_register")
                     "Nurse" -> navController.navigate("nurse_register")
+                    "Doctor" -> navController.navigate("doctor_register")
+                    "Pharmacist" -> navController.navigate("pharmacist_register")
                 }
             },
             modifier = Modifier.fillMaxWidth()

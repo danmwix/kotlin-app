@@ -1,4 +1,4 @@
-package com.example.maternitymanagement.ui.nurse
+package com.example.maternitymanagement.ui.doctor
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -10,13 +10,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 @Composable
-fun AppointmentScreen(patientRegNumber: String) {
-    var date by remember { mutableStateOf("") }
-    var time by remember { mutableStateOf("") }
-    var reason by remember { mutableStateOf("") }
+fun ReturnDateScreen(patientRegNumber: String) {
+    var returnDate by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
-    var patientName by remember { mutableStateOf("Loading...") }
     var userId by remember { mutableStateOf<String?>(null) }
+    var patientName by remember { mutableStateOf("Loading...") }
 
     val scope = rememberCoroutineScope()
 
@@ -30,35 +28,19 @@ fun AppointmentScreen(patientRegNumber: String) {
                 val doc = snapshot.documents.first()
                 userId = doc.getString("id")
                 patientName = doc.getString("full_name") ?: patientRegNumber
-            } else {
-                patientName = "Unknown"
             }
         }
     }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text("Schedule Appointment for $patientName", style = MaterialTheme.typography.headlineMedium)
+        Text("Schedule Return Date for $patientName", style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
-            value = date,
-            onValueChange = { date = it },
-            label = { Text("Date (YYYY-MM-DD)") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = time,
-            onValueChange = { time = it },
-            label = { Text("Time (HH:MM)") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = reason,
-            onValueChange = { reason = it },
-            label = { Text("Reason") },
+            value = returnDate,
+            onValueChange = { returnDate = it },
+            label = { Text("Return Date (YYYY-MM-DD)") },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -68,30 +50,26 @@ fun AppointmentScreen(patientRegNumber: String) {
             scope.launch {
                 try {
                     userId?.let {
-                        // Save appointment under UID
-                        FirebaseManager.firestore.collection("appointments").document(it).set(
-                            mapOf(
-                                "appointment_date" to date,
-                                "appointment_time" to time,
-                                "reason" to reason
-                            )
+                        // Save return date in a dedicated collection
+                        FirebaseManager.firestore.collection("return_dates").document(it).set(
+                            mapOf("return_date" to returnDate)
                         ).await()
 
-                        // Update return date in patient profile
+                        // Update patient profile so mother sees it
                         FirebaseManager.firestore.collection("profiles").document(it).update(
-                            mapOf("return_date" to date)
+                            mapOf("return_date" to returnDate)
                         ).await()
 
-                        message = "Appointment scheduled successfully!"
+                        message = "Return date scheduled successfully!"
                     } ?: run {
                         message = "Patient not found"
                     }
                 } catch (e: Exception) {
-                    message = e.message ?: "Error scheduling appointment"
+                    message = e.message ?: "Error scheduling return date"
                 }
             }
         }, modifier = Modifier.fillMaxWidth()) {
-            Text("Save Appointment")
+            Text("Save Return Date")
         }
 
         if (message.isNotEmpty()) {

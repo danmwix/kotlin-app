@@ -5,7 +5,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavBackStackEntry
 import com.example.maternitymanagement.data.remote.FirebaseManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -13,7 +12,7 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
 @Composable
-fun PregnancyTrackingScreen(patientRegNumber: String, navEntry: NavBackStackEntry) {
+fun PregnancyTrackingScreen(patientRegNumber: String) {
     var lmp by remember { mutableStateOf("") }
     var weeksPregnant by remember { mutableStateOf("") }
     var trimester by remember { mutableStateOf("") }
